@@ -1,0 +1,32 @@
+create database ship;
+
+use ship;
+
+select * from ship_fuel;
+
+-- show the ship type and the sum of fuel consumption 
+select ship_type,ceil(sum(fuel_consumption))
+from ship_fuel
+group by ship_type;
+-- Show the ship ID and the average of engine efcieny 
+select ship_id,floor(avg(engine_efficiency))
+from ship_fuel
+group by ship_id;
+-- for stormy weather condition show the total CO2 emission 
+select weather_conditions,round(sum(CO2_emissions))
+from ship_fuel
+group by weather_conditions;
+-- For calm weather show the total distance traveled 
+select weather_conditions,sum(distance)
+from ship_fuel
+where weather_conditions="Calm"
+group by weather_conditions;
+-- from 30 to 80 show the distance and the route id 
+select distance,route_id
+from ship_fuel
+where distance between 30 and 80;
+-- For fuel type HFO show the fuel consmuotion and total of CO2 emission 
+select fuel_type,fuel_consumption,sum(CO2_emissions)
+from ship_fuel
+where fuel_type="HFO"
+group by fuel_type,fuel_consumption;
